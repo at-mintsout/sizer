@@ -247,3 +247,58 @@ links.forEach(link => {
 document.addEventListener('DOMContentLoaded', () => {
     renderHistoryTable();
 });
+// --- PROGRESSIVE WEB APP (PWA) INSTALL ENGINE ---
+
+let deferredPrompt;
+const installAppBtn = document.getElementById('installAppBtn');
+
+// Register the Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registered successfully.'))
+            .catch(err => console.log('Service Worker registration failed:', err));
+    });
+}
+
+// Capture the browser's install request
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent default browser popup mini-bar from showing automatically
+    e.preventDefault();
+    // Stash the event so we can trigger it later
+    deferredPrompt = e;
+    
+    // Unhide the "Install as App" button on the UI
+    if (installAppBtn) {
+        installAppBtn.style.display = 'inline-block';
+    }
+});
+
+// Handle the custom app install button click
+if (installAppBtn) {
+    installAppBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        
+        // Show the native device install prompt
+        deferredPrompt.prompt();
+        
+        // Wait for the user to respond to the prompt
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User installation choice outcome: ${outcome}`);
+        
+        // Clear the prompt variable; it can only be used once
+        deferredPrompt = null;
+        
+        // Hide our custom action button again
+        installAppBtn.style.display = 'none';
+    });
+}
+
+// Hide button if app is already installed successfully
+window.addEventListener('appinstalled', () => {
+    console.log('App successfully installed into system applications registry.');
+    if (installAppBtn) {
+        installAppBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
+});
