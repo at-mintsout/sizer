@@ -3,34 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image & PDF Resizer</title>
+    <title>ShrinkVibe | Professional Image & PDF Resizer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Image & PDF Resizer</h1>
-        <p>Compress and resize your files locally in your browser.</p>
 
-        <div class="card">
-            <label for="fileInput">Choose an Image or PDF file:</label>
-            <input type="file" id="fileInput" accept="image/*, application/pdf">
+    <header class="navbar">
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'">
+            <span id="logo-fallback" class="logo-text" style="display:none;">Shrink<span class="accent-text">Vibe</span></span>
         </div>
+        <nav class="nav-menu">
+            <a href="#tools" class="active">Tools</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+            <a href="#terms">T&C</a>
+        </nav>
+    </header>
 
-        <div class="card settings" id="settingsArea" style="display:none;">
-            <h3>Resize Settings</h3>
-            <label for="scaleFactor">Scale Quality / Size (10% to 100%):</label>
-            <input type="range" id="scaleFactor" min="10" max="100" value="80">
-            <span id="scaleValue">80%</span>
-            
-            <button id="processBtn">Resize File</button>
-        </div>
+    <main class="main-container" id="tools">
+        <section class="tool-section">
+            <div class="tool-header">
+                <h2>Image & PDF Resizer</h2>
+                <p>Maximize speed, control size, maintain crisp quality instantly.</p>
+            </div>
 
-        <div class="card" id="downloadArea" style="display:none;">
-            <h3>Ready!</h3>
-            <a id="downloadLink" href="#" download>Download Resized File</a>
+            <div class="upload-box" id="dropZone">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <p>Drag and drop your file here or <span class="browse-btn">Browse Files</span></p>
+                <input type="file" id="fileInput" accept="image/*, application/pdf" hidden>
+                <div id="fileInfo" class="file-info"></div>
+            </div>
+
+            <div class="config-panel" id="configPanel">
+                <h3>Resizing Configurations</h3>
+                
+                <div class="control-group">
+                    <label>Resize Strategy:</label>
+                    <div class="radio-tabs">
+                        <label class="tab-label">
+                            <input type="radio" name="resizeType" value="percentage" checked>
+                            <span>Percentage (%)</span>
+                        </label>
+                        <label class="tab-label">
+                            <input type="radio" name="resizeType" value="kb">
+                            <span>Target Size (KB)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group" id="percentageGroup">
+                    <label for="scaleSlider">Scale Factor: <span id="sliderVal">80%</span></label>
+                    <input type="range" id="scaleSlider" min="10" max="100" value="80" class="slider">
+                </div>
+
+                <div class="control-group hidden" id="kbGroup">
+                    <label for="kbInput">Target File Size (KB):</label>
+                    <input type="number" id="kbInput" min="5" max="50000" value="150" class="num-input">
+                </div>
+
+                <div class="control-group toggle-group">
+                    <label class="switch-container">
+                        <input type="checkbox" id="holdQuality" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <div class="toggle-text">
+                        <strong>Hold Quality Constraint</strong>
+                        <p>Preserves structural sharpness and element scaling relative to size change.</p>
+                    </div>
+                </div>
+
+                <button id="processBtn" class="action-btn">Optimize & Resize File</button>
+            </div>
+
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <p>Processing files smoothly... hold tight!</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <div class="download-panel" id="downloadPanel">
+                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>File Successfully Processed!</h3>
+                <p>Your file has been adjusted according to specifications safely inside your browser.</p>
+                <a id="downloadLink" class="download-btn" href="#" download><i class="fa-solid fa-download"></i> Download File</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section card hidden-section">
+            <h2>About Our Engine</h2>
+            <p>ShrinkVibe delivers studio-grade pixel processing and deep PDF object vector modifications directly into the browser viewport. No servers look at your data—meaning 100% confidentiality across financial reports, internal briefs, and confidential assets.</p>
+        </section>
+
+        <section id="contact" class="content-section card hidden-section">
+            <h2>Contact Corporate Support</h2>
+            <p>Have enterprise questions, API implementation integration requests, or bulk volume feedback? Drop a message to our infrastructure teams at <strong>support@shrinkvibe.dev</strong>.</p>
+        </section>
+
+        <section id="terms" class="content-section card hidden-section">
+            <h2>Terms & Conditions</h2>
+            <p>Our platform handles logic locally. All content is modified sandbox-side within active runtime memory frames. No retention architecture is constructed. By executing tasks, you take responsibility for having adequate rights to use target source files.</p>
+        </section>
+
+        <section id="historySection" class="content-section card hidden-section">
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Local Workspace History</h2>
+            <p class="subtitle">Your previous operations on this system. Cached locally for privacy assurance.</p>
+            <div class="table-responsive">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Original Size</th>
+                            <th>Target Configuration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyLogBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: #a0aec0;">No actions recorded yet during this session.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="clearHistoryBtn" class="clear-btn">Clear Workspace History</button>
+        </section>
+    </main>
+
+    <footer class="footer-bar">
+        <div class="footer-links">
+            <a href="#tools" class="footer-tab active-tab" id="tabTools"><i class="fa-solid fa-screwdriver-wrench"></i> Tools</a>
+            <a href="#historySection" class="footer-tab" id="tabHistory"><i class="fa-solid fa-history"></i> History Log</a>
         </div>
-    </div>
+        <p class="copyright">&copy; 2026 ShrinkVibe Global Systems. Secure Local Pipeline Ecosystem.</p>
+    </footer>
 
     <script src="app.js"></script>
 </body>
