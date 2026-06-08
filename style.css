@@ -1,47 +1,427 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+/* BRAND COLOUR PALETTE: Premium Navy, Slate Blue, Deep Cyan accents */
+:root {
+    --bg-dark-navy: #0B132B;
+    --bg-card-navy: #1C2541;
+    --accent-cyan: #48CAE4;
+    --accent-blue: #0077B6;
+    --text-white: #FFFFFF;
+    --text-muted: #A0AEC0;
+    --success-green: #2ECC71;
+    --transition-speed: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.container {
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-dark-navy);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px; /* buffer space for footer */
+}
+
+/* NAVBAR DESIGN */
+.navbar {
+    background-color: var(--bg-card-navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.site-logo {
+    height: 40px;
+    max-width: 180px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.accent-text {
+    color: var(--accent-cyan);
+}
+
+.nav-menu a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition-speed);
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    color: var(--accent-cyan);
+}
+
+/* APP MAIN CORE LAYOUT */
+.main-container {
+    flex: 1;
+    max-width: 800px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+.tool-section {
+    background: var(--bg-card-navy);
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tool-header h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.tool-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* DRAG DROP UPLOAD BOX */
+.upload-box {
+    border: 2px dashed rgba(72, 202, 228, 0.4);
+    background: rgba(11, 19, 43, 0.4);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-speed);
+}
+
+.upload-box:hover, .upload-box.dragover {
+    border-color: var(--accent-cyan);
+    background: rgba(72, 202, 228, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--accent-cyan);
+    margin-bottom: 15px;
+}
+
+.browse-btn {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.file-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--success-green);
+    font-weight: 600;
+}
+
+/* CONFIG PANEL ELEMENTS */
+.config-panel {
+    display: none;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-panel h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--accent-cyan);
+}
+
+.control-group {
+    margin-bottom: 22px;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+/* Radio Tab Switchers */
+.radio-tabs {
+    display: flex;
+    background: var(--bg-dark-navy);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.tab-label {
+    flex: 1;
+    cursor: pointer;
     text-align: center;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.tab-label input {
+    display: none;
 }
 
-input[type="file"], input[type="range"] {
+.tab-label span {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    transition: var(--transition-speed);
+}
+
+.tab-label input:checked + span {
+    background: var(--accent-blue);
+    color: var(--text-white);
+}
+
+/* Interactive Sliders & Inputs */
+.slider {
     width: 100%;
-    margin-top: 10px;
+    height: 6px;
+    background: var(--bg-dark-navy);
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
 }
 
-button, #downloadLink {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
     cursor: pointer;
+}
+
+.num-input {
+    width: 100%;
+    background: var(--bg-dark-navy);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+/* Quality Toggle Container */
+.toggle-group {
+    display: flex;
+    align-items: center;
+    background: rgba(11, 19, 43, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.switch-container {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+    margin-right: 15px;
+}
+
+.switch-container input { display: none; }
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #4a5568;
+    border-radius: 34px;
+    transition: var(--transition-speed);
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: var(--transition-speed);
+}
+
+input:checked + .toggle-slider { background-color: var(--accent-cyan); }
+input:checked + .toggle-slider:before { transform: translateX(22px); }
+
+.toggle-text strong { display: block; font-size: 0.9rem; color: white; }
+.toggle-text p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Action Buttons */
+.action-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-blue), #0056b3);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition-speed);
+    box-shadow: 0 4px 15px rgba(0, 119, 182, 0.3);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+}
+
+/* FOUR SECOND LOADING COMPONENT */
+.loading-overlay {
+    display: none;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.1);
+    border-top-color: var(--accent-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-dark-navy);
+    border-radius: 10px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-cyan);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+/* DOWNLOAD BOX INTERACTIVE PANEL */
+.download-panel {
+    display: none;
+    text-align: center;
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success-green);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+.success-icon {
+    font-size: 2.5rem;
+    color: var(--success-green);
+    margin-bottom: 10px;
+}
+
+.download-btn {
+    display: inline-block;
+    background: var(--success-green);
+    color: white;
     text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
     font-weight: bold;
     margin-top: 15px;
+    transition: var(--transition-speed);
 }
 
-button:hover, #downloadLink:hover {
-    background-color: #0056b3;
+.download-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); }
+
+/* SECTIONS HANDLING CARDS */
+.card {
+    background: var(--bg-card-navy);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.card h2 { font-size: 1.4rem; margin-bottom: 12px; color: var(--accent-cyan); }
+.card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+.card .subtitle { margin-bottom: 20px; }
+
+/* HISTORY LOG TABLE */
+.table-responsive { overflow-x: auto; margin-top: 15px; }
+.history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+.history-table th, .history-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.history-table th { color: var(--accent-cyan); font-weight: 600; }
+.history-table td { color: var(--text-white); }
+.clear-btn { background: transparent; border: 1px solid #e53e3e; color: #e53e3e; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-top: 20px; font-weight: bold; transition: var(--transition-speed); }
+.clear-btn:hover { background: #e53e3e; color: white; }
+
+/* UTILITIES */
+.hidden { display: none !important; }
+.hidden-section { display: none; }
+
+/* PERSISTENT FOOTER CONTROLS */
+.footer-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bg-card-navy);
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.footer-links { display: flex; gap: 15px; }
+.footer-tab {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition-speed);
+}
+
+.footer-tab:hover, .footer-tab.active-tab {
+    background: rgba(72, 202, 228, 0.12);
+    color: var(--accent-cyan);
+}
+
+.copyright { font-size: 0.8rem; color: var(--text-muted); }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .navbar, .footer-bar { flex-direction: column; gap: 15px; text-align: center; }
+    .nav-menu a { margin: 0 10px; }
+    body { padding-bottom: 140px; }
 }
