@@ -1,11 +1,12 @@
 {
-  "name": "ShrinkVibe File Suite",
+  "name": "ShrinkVibe App Workspace",
   "short_name": "ShrinkVibe",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0B132B",
   "theme_color": "#1C2541",
-  "orientation": "portrait-primary",
+  "description": "Premium secure browser-native Image and PDF processing application.",
+  "orientation": "any",
   "icons": [
     {
       "src": "logo.png",
