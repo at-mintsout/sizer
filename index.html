@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShrinkVibe | Professional Image & PDF Resizer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 </head>
@@ -13,7 +14,7 @@
     <header class="navbar">
         <div class="logo-area">
             <img src="logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'">
-            <span id="logo-fallback" class="logo-text" style="display:none;">Shrink<span class="accent-text">Vibe</span></span>
+            <span id="logo-fallback" class="logo-text">Shrink<span class="accent-text">Vibe</span></span>
         </div>
         <nav class="nav-menu">
             <a href="#tools" class="active">Tools</a>
@@ -90,23 +91,15 @@
                 <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
                 <h3>File Successfully Processed!</h3>
                 <p>Your file has been adjusted according to specifications safely inside your browser.</p>
-                <a id="downloadLink" class="download-btn" href="#" download><i class="fa-solid fa-download"></i> Download File</a>
+                
+                <div class="action-button-container" style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px;">
+                    <a id="downloadLink" class="download-btn" href="#" download><i class="fa-solid fa-download"></i> Download File</a>
+                    
+                    <button id="installAppBtn" class="app-install-btn" style="display: none;">
+                        <i class="fa-solid fa-mobile-screen-button"></i> Download as an App
+                    </button>
+                </div>
             </div>
-            <link rel="manifest" href="manifest.json">
-
-<div class="download-panel" id="downloadPanel">
-    <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
-    <h3>File Successfully Processed!</h3>
-    <p>Your file has been adjusted according to specifications safely inside your browser.</p>
-    
-    <div class="action-button-group" style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 15px;">
-        <a id="downloadLink" class="download-btn" href="#" download style="margin-top: 0; width: 220px;"><i class="fa-solid fa-download"></i> Download File</a>
-        
-        <button id="installAppBtn" class="action-btn" style="width: 220px; background: linear-gradient(135deg, #48CAE4, #0077B6); display: none;">
-            <i class="fa-solid fa-mobile-screen-button"></i> Install as App
-        </button>
-    </div>
-</div>
         </section>
 
         <section id="about" class="content-section card hidden-section">
