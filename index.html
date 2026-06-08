@@ -92,6 +92,21 @@
                 <p>Your file has been adjusted according to specifications safely inside your browser.</p>
                 <a id="downloadLink" class="download-btn" href="#" download><i class="fa-solid fa-download"></i> Download File</a>
             </div>
+            <link rel="manifest" href="manifest.json">
+
+<div class="download-panel" id="downloadPanel">
+    <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <h3>File Successfully Processed!</h3>
+    <p>Your file has been adjusted according to specifications safely inside your browser.</p>
+    
+    <div class="action-button-group" style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 15px;">
+        <a id="downloadLink" class="download-btn" href="#" download style="margin-top: 0; width: 220px;"><i class="fa-solid fa-download"></i> Download File</a>
+        
+        <button id="installAppBtn" class="action-btn" style="width: 220px; background: linear-gradient(135deg, #48CAE4, #0077B6); display: none;">
+            <i class="fa-solid fa-mobile-screen-button"></i> Install as App
+        </button>
+    </div>
+</div>
         </section>
 
         <section id="about" class="content-section card hidden-section">
