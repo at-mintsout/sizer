@@ -1,4 +1,3 @@
-/* BRAND COLOUR PALETTE: Premium Navy, Slate Blue, Deep Cyan accents */
 :root {
     --bg-dark-navy: #0B132B;
     --bg-card-navy: #1C2541;
@@ -24,7 +23,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 80px; /* buffer space for footer */
+    padding-bottom: 90px;
 }
 
 /* NAVBAR DESIGN */
@@ -74,7 +73,7 @@ body {
     color: var(--accent-cyan);
 }
 
-/* APP MAIN CORE LAYOUT */
+/* APP LAYOUT */
 .main-container {
     flex: 1;
     max-width: 800px;
@@ -106,7 +105,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* DRAG DROP UPLOAD BOX */
+/* UPLOAD AREA */
 .upload-box {
     border: 2px dashed rgba(72, 202, 228, 0.4);
     background: rgba(11, 19, 43, 0.4);
@@ -141,7 +140,7 @@ body {
     font-weight: 600;
 }
 
-/* CONFIG PANEL ELEMENTS */
+/* CONFIG INTERFACES */
 .config-panel {
     display: none;
     margin-top: 30px;
@@ -167,7 +166,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Radio Tab Switchers */
 .radio-tabs {
     display: flex;
     background: var(--bg-dark-navy);
@@ -200,7 +198,6 @@ body {
     color: var(--text-white);
 }
 
-/* Interactive Sliders & Inputs */
 .slider {
     width: 100%;
     height: 6px;
@@ -229,7 +226,6 @@ body {
     font-size: 1rem;
 }
 
-/* Quality Toggle Container */
 .toggle-group {
     display: flex;
     align-items: center;
@@ -275,7 +271,6 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
 .toggle-text strong { display: block; font-size: 0.9rem; color: white; }
 .toggle-text p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
-/* Action Buttons */
 .action-btn {
     width: 100%;
     background: linear-gradient(135deg, var(--accent-blue), #0056b3);
@@ -292,10 +287,9 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
 
 .action-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
 }
 
-/* FOUR SECOND LOADING COMPONENT */
+/* LOADING OVERLAY */
 .loading-overlay {
     display: none;
     text-align: center;
@@ -331,7 +325,7 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
     transition: width 0.1s linear;
 }
 
-/* DOWNLOAD BOX INTERACTIVE PANEL */
+/* DOWNLOAD & APP ACTION CONTAINER */
 .download-panel {
     display: none;
     text-align: center;
@@ -353,16 +347,34 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
     background: var(--success-green);
     color: white;
     text-decoration: none;
-    padding: 12px 30px;
+    padding: 14px 40px;
     border-radius: 8px;
     font-weight: bold;
-    margin-top: 15px;
+    width: 260px;
+    text-align: center;
     transition: var(--transition-speed);
 }
 
 .download-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4); }
 
-/* SECTIONS HANDLING CARDS */
+.app-install-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    color: var(--bg-dark-navy);
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    width: 260px;
+    cursor: pointer;
+    text-align: center;
+    transition: var(--transition-speed);
+}
+
+.app-install-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(72, 202, 228, 0.4); }
+
+/* CONTENT MODULE CARDS */
 .card {
     background: var(--bg-card-navy);
     padding: 30px;
@@ -375,7 +387,7 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
 .card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
 .card .subtitle { margin-bottom: 20px; }
 
-/* HISTORY LOG TABLE */
+/* RECENT HISTORY GRAPHICS */
 .table-responsive { overflow-x: auto; margin-top: 15px; }
 .history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
 .history-table th, .history-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -384,11 +396,10 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
 .clear-btn { background: transparent; border: 1px solid #e53e3e; color: #e53e3e; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-top: 20px; font-weight: bold; transition: var(--transition-speed); }
 .clear-btn:hover { background: #e53e3e; color: white; }
 
-/* UTILITIES */
 .hidden { display: none !important; }
 .hidden-section { display: none; }
 
-/* PERSISTENT FOOTER CONTROLS */
+/* APP FOOTER PERSISTENCE BAR */
 .footer-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -419,9 +430,8 @@ input:checked + .toggle-slider:before { transform: translateX(22px); }
 
 .copyright { font-size: 0.8rem; color: var(--text-muted); }
 
-/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .navbar, .footer-bar { flex-direction: column; gap: 15px; text-align: center; }
     .nav-menu a { margin: 0 10px; }
-    body { padding-bottom: 140px; }
+    body { padding-bottom: 150px; }
 }
